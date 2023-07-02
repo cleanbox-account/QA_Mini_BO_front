@@ -1,0 +1,20 @@
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+logs/
+.pytest_cache
+**/__pycache__
+
+*.xml
+*.html
+Data/UsersDetails.xlsx
+Data/pages_addresses.py
+Data/Users.json
+Data/api_users.json
+Data/external_users.json
+API/url_elm.py
