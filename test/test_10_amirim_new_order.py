@@ -86,7 +86,7 @@ class TestAmirimNewOrder(BaseClass):
             usr_mobile=usr['mobile_number']
             usr_f_name=usr["user_f_name"]
             usr_l_name=usr["user_l_name"]
-            new_pcg_number="Amirim"+str(random.randint(100000, 999999))
+            new_pcg_number="AMR"+str(random.randint(10000000, 99999999))
             c_order_page.getInputPcgNumber().send_keys(new_pcg_number)
             sleep(1)
             c_order_page.getInputMobileNumber().send_keys(usr_mobile)
@@ -124,14 +124,16 @@ class TestAmirimNewOrder(BaseClass):
         sleep(2)
         
         first_order=orders_list.getFirstRow('M')
-        log.info("\nLast Order :\n------------\n order - {0} \n pcg.num. - {1}  \n ord.status - {6} \n #{2} - <{3} {4}> - {5}".format(
+        log.info("\nLast Order :\n------------\n order - {0} \n pcg.num. - {1}  \n ord.status - {7} \n #{2} - <{3} {4}> - {6} \n created by -{5} \n waybill - {8}".format(
             first_order["order_number"],
             first_order["pcg_number"],
             first_order["mobile_number"],
             first_order["usr_first_name"],
             first_order["usr_last_name"],
             first_order["station_name"],
-            first_order["order_status"]
+            first_order["created_user"],
+            first_order["order_status"],
+            first_order["waybill"]
             ))
         sleep(2)
         assert new_pcg_number==first_order["pcg_number"], log.warning("The package number in last order is different from package number that used in new order")

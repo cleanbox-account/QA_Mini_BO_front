@@ -65,8 +65,11 @@ class CreateNewOrderPage:
                 for st in stations:
                     if station_key in st.text:
                         station_name=st.text
-                        
-                        st.find_element_by_xpath("..").click()
+                        try:
+                            st.click()
+                        except Exception:
+                            st.find_element_by_xpath("..").click()
+                
                         return station_name     
                 return False    
             else:

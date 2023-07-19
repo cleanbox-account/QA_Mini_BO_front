@@ -1,9 +1,9 @@
 # ----------------------------------------------------------------------------
 # Created By  : Edi Tchaevsky
-# Created Date: 2023.01.01
+# Created Date: 2023.07.11
 # version ='1.0'
 # ---------------------------------------------------------------------------
-""" testing with pytest tool. Testing of Mini BO for Gefen Medical - new order pages"""
+""" testing with pytest tool. Testing of Mini BO for TAU - new order pages"""
 # ---------------------------------------------------------------------------
 import random
 import pytest
@@ -18,7 +18,7 @@ import Data.pages_addresses as env
 from selenium.webdriver.common.keys import Keys
 
 
-class TestGeffenMedicalBONewOrder(BaseClass):
+class TestTAUNewOrder(BaseClass):
     main_page = env.main_page
     orders_list_page=env.orders_list_page
     stations_list_page=env.stations_list_page
@@ -27,9 +27,9 @@ class TestGeffenMedicalBONewOrder(BaseClass):
 
     
 
-    @pytest.mark.parametrize('role', [ pytest.param('GeffenMedical' ),   #gesenMedical
+    @pytest.mark.parametrize('role', [ pytest.param('TAU' ),   
                                                     ])
-    def test_06_for_geffen_medical_new_order(self, role):
+    def test_14_for_TAU_new_order(self, role):
         log = self.getLogger('test')
         log.info("---"+" "*10+"Menu overview test for <{0}> operator".format(role)+" "*10+"---")
         if not self.driver.current_url== self.main_page :
@@ -49,7 +49,7 @@ class TestGeffenMedicalBONewOrder(BaseClass):
         log.info("Succeed to open login page: %s" % self.driver.current_url)
         user=get_user(role)
         assert not user==None , log.error("Failed assertion, user details was not found")
-        log.info("Succeed to find user's details for {0} role:".format(role))
+        log.info("Succeed to find user's details with {0}:".format(role))
         log.info("user first name:"+user["user_f_name"])
         log.info("user last name:"+user["user_l_name"])
         log.info("mobile number:"+user["mobile_number"])
@@ -58,7 +58,7 @@ class TestGeffenMedicalBONewOrder(BaseClass):
         logined_yes_not=LoginMiniBO.login_to_mini_bo(self, user["mobile_number"], user["password"], role)
         if not logined_yes_not:
             assert  False
-        elif role =='GeffenMedical':
+        elif role =='TAU':
             assert self.driver.current_url == self.orders_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         else:
@@ -73,27 +73,30 @@ class TestGeffenMedicalBONewOrder(BaseClass):
         
         
         c_order_page=CreateNewOrderPage(self.driver)
+       
         has_new_order=False
+        
         while not has_new_order:
             usr=get_user("Customer")
             usr_mobile=usr['mobile_number']
             usr_f_name=usr["user_f_name"]
             usr_l_name=usr["user_l_name"]
-            new_pcg_number="GFN"+str(random.randint(10000000, 99999999))
+            new_pcg_number="TAU"+str(random.randint(10000000, 99999999))
             c_order_page.getInputPcgNumber().send_keys(new_pcg_number)
-            sleep(2)
+            sleep(1)
             c_order_page.getInputMobileNumber().send_keys(usr_mobile)
-            sleep(3)
+            sleep(1)
             c_order_page.getInputFirstName().send_keys(Keys.CONTROL, 'a')
             c_order_page.getInputFirstName().send_keys(Keys.DELETE)
             c_order_page.getInputFirstName().send_keys(usr_f_name)
-            sleep(2)
+            sleep(1)
             c_order_page.getInputLastName().send_keys(Keys.CONTROL, 'a')
             c_order_page.getInputLastName().send_keys(Keys.DELETE)
             c_order_page.getInputLastName().send_keys(usr_l_name)
-
-            sleep(2)
+            sleep(1)
             c_order_page.getInputStations().click()
+            sleep(1)
+            
             station_number='5113'
             log.info("Try to find "+station_number+" ...")
             my_station=c_order_page.findStation(station_number)
@@ -101,10 +104,9 @@ class TestGeffenMedicalBONewOrder(BaseClass):
                 log.info("The  {0} station was selected".format(my_station))
             else:    
                 log.warning("Failed to find the relevant station ")
-            
-            sleep(3)
-            c_order_page.clickCreateBtn()
             sleep(1)
+
+            c_order_page.clickCreateBtn()
             if self.verifyElSelectorPresence(c_order_page.msg_succ):
                 log.info("Succeed new order creation!")
                 c_order_page.clickCloseMsgBtn()
@@ -127,8 +129,8 @@ class TestGeffenMedicalBONewOrder(BaseClass):
 
         sleep(2)
         
-        first_order=orders_list.getFirstRow('S')
-        log.info("\nLast Order :\n------------\n order - {0} \n pcg.num. - {1}  \n ord.status - {7} \n #{2} - <{3} {4}> - {6} \n created by -{5} \n waybill - {8}".format(
+        first_order=orders_list.getFirstRow('T')
+        log.info("\nLast Order :\n------------\n order - {0} \n pcg.num. - {1}  \n ord.status - {7} \n #{2} - <{3} {4}> - {6} \n created by -{5}".format(
             first_order["order_number"],
             first_order["pcg_number"],
             first_order["mobile_number"],
@@ -136,8 +138,7 @@ class TestGeffenMedicalBONewOrder(BaseClass):
             first_order["usr_last_name"],
             first_order["station_name"],
             first_order["created_user"],
-            first_order["order_status"],
-            first_order["waybill"]
+            first_order["order_status"]
             ))
         sleep(2)
         assert new_pcg_number==first_order["pcg_number"], log.warning("The package number in last order is different from package number that used in new order")
@@ -147,4 +148,5 @@ class TestGeffenMedicalBONewOrder(BaseClass):
         menu_panel.clickLogout()
         assert self.driver.current_url==self.main_page , log.error("Failed assertion, wrong url...{0}".format(self.driver.current_url))
         log.info("Succeed assertion , correct url has opened after logout")
+        sleep(1)
         sleep(1)

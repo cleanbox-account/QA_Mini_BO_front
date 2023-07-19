@@ -20,16 +20,19 @@ class TestStartBAC(BaseClass):
     decathlon_stations_list=env.decathlon_stations_list
     stations_list_page=env.stations_list_page
         
-    @pytest.mark.parametrize('role', [pytest.param('DHL'),  #dhl
-                                                pytest.param('Bar' ),   #bar
-                                                pytest.param('UPS' ),   #ups
-                                                pytest.param('Decathlon' ),   #decathlon
-                                                pytest.param('GeffenMedical' ),   #gefenMedical
-                                                pytest.param('YadMordechai' ),   #yadmordehai
-                                                pytest.param('SdeMoshe' ),   #sde moshe
-                                                pytest.param('Amirim' ),   #amirim
-                                                pytest.param('OneProject' ),   #oneProject
-                                                pytest.param('Customer', marks=pytest.mark.xfail )   #customer
+    @pytest.mark.parametrize('role', [pytest.param('Amirim' ), #amirim
+                                      pytest.param('Bar' ),   #bar
+                                      pytest.param('DHL'),  #dhl
+                                      pytest.param('Decathlon' ),   #decathlon  
+                                      pytest.param('GeffenMedical' ),   #gefenMedical 
+                                      pytest.param('HFD' ),   #hfd 
+                                      pytest.param('SdeMoshe' ),   #sde moshe       
+                                      pytest.param('UPS' ),   #ups
+                                      pytest.param('YadMordechai' ),   #yadmordehai
+                                      pytest.param('OneProject' ),   #oneProject
+                                      pytest.param('YDM' ),   #ydm
+                                      pytest.param('TAU' ),   #TAU                   
+                                      pytest.param('Customer', marks=pytest.mark.xfail ),   #customer
                                                ])
     def test_01_login_from_json(self, role):
         log = self.getLogger('test')
@@ -60,13 +63,13 @@ class TestStartBAC(BaseClass):
         logined_yes_not=LoginMiniBO.login_to_mini_bo(self, user["mobile_number"], user["password"], role)
         if not logined_yes_not:
             assert  False
-        elif role in ('DHL','Bar','UPS'):
+        elif role in ('DHL','Bar','UPS','YDM','HFD'):
             assert self.driver.current_url == self.stations_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         elif role =='Decathlon':
             assert self.driver.current_url == self.decathlon_stations_list, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
-        elif role in ('GeffenMedical','YadMordechai','SdeMoshe','Amirim','OneProject'):
+        elif role in ('GeffenMedical','YadMordechai','SdeMoshe','Amirim','OneProject','TAU'):
             assert self.driver.current_url == self.orders_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         else:
@@ -78,14 +81,15 @@ class TestStartBAC(BaseClass):
             menu_panel.clickMenuOpen()
             if self.verifyElSelectorPresence(menu_panel.logout):
                 menu_panel.clickLogout()
-                assert self.current_url==self.main_page , log.warning("Failed asertion, no logout")
+                sleep(1)
+                assert self.driver.current_url==self.main_page , log.warning("Failed asertion, no logout")
                 log.info("Succeed assertion, login page was opened")
             else:
                 log.war("Logout button has not detected")
                 
         except :
             log.warning("Use back command...")
-            self.driver.back()
+            self.driver.get(self.main_page)
         sleep(1)
         
     

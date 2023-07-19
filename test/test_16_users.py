@@ -35,6 +35,9 @@ class TestUsersPage(BaseClass):
                                                 pytest.param('YadMordechai' ),   #yadmordehai
                                                 pytest.param('SdeMoshe' ),   #sde moshe
                                                 pytest.param('Amirim' ),   #amirim
+                                                pytest.param('YDM' ) , #ydm
+                                                pytest.param('TAU' ) , #tau
+                                                pytest.param('HFD' )  #hfd
                                                ])
     def test_16_new_user(self, role):
         log = self.getLogger('test')
@@ -65,7 +68,7 @@ class TestUsersPage(BaseClass):
         logined_yes_not=LoginMiniBO.login_to_mini_bo(self, user["mobile_number"], user["password"], role)
         if not logined_yes_not:
             assert  False
-        elif role in ('DHL','Bar','UPS'):
+        elif role in ('DHL','Bar','UPS','YDM','HFD'):
             assert self.driver.current_url == self.stations_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         elif role =='Decathlon':
@@ -86,7 +89,7 @@ class TestUsersPage(BaseClass):
             
             assert self.driver.current_url == self.orders_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for selected station has opened".format(self.driver.current_url,role))
-        elif role in ('GeffenMedical','YadMordechai','SdeMoshe','Amirim'):
+        elif role in ('GeffenMedical','YadMordechai','SdeMoshe','Amirim','TAU'):
             assert self.driver.current_url == self.orders_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         else:

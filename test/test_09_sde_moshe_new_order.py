@@ -75,18 +75,14 @@ class TestSdeMosheBONewOrder(BaseClass):
         c_order_page=CreateNewOrderPage(self.driver)
         c_order_page.getInputStations().click()
 
-        my_station=c_order_page.findStation("5909")
-        if my_station:
-            log.info("The  {0} station was selected".format(my_station))
-        else:    
-            log.warning("Failed to find the relevant station ")
+
         has_new_order=False
         while not has_new_order:
             usr=get_user("Customer")
             usr_mobile=usr['mobile_number']
             usr_f_name=usr["user_f_name"]
             usr_l_name=usr["user_l_name"]
-            new_pcg_number="SDM"+str(random.randint(100000, 999999))
+            new_pcg_number="SDM"+str(random.randint(10000000, 99999999))
             c_order_page.getInputPcgNumber().send_keys(new_pcg_number)
             sleep(2)
             c_order_page.getInputMobileNumber().send_keys(usr_mobile)
@@ -99,6 +95,11 @@ class TestSdeMosheBONewOrder(BaseClass):
             c_order_page.getInputLastName().send_keys(Keys.DELETE)
             c_order_page.getInputLastName().send_keys(usr_l_name)
 
+            my_station=c_order_page.findStation("5909")
+            if my_station:
+                log.info("The  {0} station was selected".format(my_station))
+            else:    
+                log.warning("Failed to find the relevant station ")
             sleep(2)
             c_order_page.clickCreateBtn()
             if self.verifyElSelectorPresence(c_order_page.msg_succ):
@@ -124,14 +125,16 @@ class TestSdeMosheBONewOrder(BaseClass):
         sleep(2)
         
         first_order=orders_list.getFirstRow('M')
-        log.info("\nLast Order :\n------------\n order - {0} \n pcg.num. - {1}  \n ord.status - {6} \n #{2} - <{3} {4}> - {5}".format(
+        log.info("\nLast Order :\n------------\n order - {0} \n pcg.num. - {1}  \n ord.status - {7} \n #{2} - <{3} {4}> - {6} \n created by -{5} \n waybill - {8}".format(
             first_order["order_number"],
             first_order["pcg_number"],
             first_order["mobile_number"],
             first_order["usr_first_name"],
             first_order["usr_last_name"],
             first_order["station_name"],
-            first_order["order_status"]
+            first_order["created_user"],
+            first_order["order_status"],
+            first_order["waybill"]
             ))
         sleep(2)
         assert new_pcg_number==first_order["pcg_number"], log.warning("The package number in last order is different from package number that used in new order")

@@ -28,6 +28,12 @@ class TestBasicSuppliersBO(BaseClass):
                                                 pytest.param('Bar' ),   #bar
                                                 pytest.param('UPS' ),   #ups
                                                 pytest.param('YDM' ),   #ydm
+                                                pytest.param('TAU' ),   #TAU
+                                                pytest.param('YadMordechai' ),   #yadmordehai
+                                                pytest.param('Amirim' ),   #amirim
+                                                pytest.param('SdeMoshe' ),  #sde moshe
+                                                pytest.param('GeffenMedical' ),  #GeffenMedical
+                                                pytest.param('HFD' )  #HFD
                                                     ])
     def test_02_menu_overview(self,role):
         log = self.getLogger('test')
@@ -58,8 +64,11 @@ class TestBasicSuppliersBO(BaseClass):
         logined_yes_not=LoginMiniBO.login_to_mini_bo(self, user["mobile_number"], user["password"], role)
         if not logined_yes_not:
             assert  False
-        elif role in ('DHL','Bar','UPS','YDM'):
+        elif role in ('DHL','Bar','UPS','YDM','HFD'):
             assert self.driver.current_url == self.stations_list_page, log.error("Failed assertion, wrong url...")
+            log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
+        elif role in ('GeffenMedical','YadMordechai','SdeMoshe','Amirim','TAU'):
+            assert self.driver.current_url == self.orders_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         else:
             raise log.error("Failed , something well wrong")
@@ -88,7 +97,7 @@ class TestBasicSuppliersBO(BaseClass):
         log.info("Succeed assertion , correct url has opened...{0}".format(self.driver.current_url))
         sleep(1)
         
-        if role =='YDM':
+        if role in ('YDM','TAU','YadMordechai','SdeMoshe','Amirim','GeffenMedical','HFD'):
             menu_panel.clickMenuOpen()
             menu_panel.getCreateOrderLink()
             assert self.driver.current_url==self.create_new_order_page , log.error("Failed assertion, wrong url...{0}".format(self.driver.current_url))
