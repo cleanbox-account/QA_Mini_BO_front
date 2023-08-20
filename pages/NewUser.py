@@ -15,12 +15,12 @@ class NewUserPage:
         
     new_usr= (By.CSS_SELECTOR,"div[class='btn-new-user']")
     
-    new_usr_input_fname=(By.CSS_SELECTOR,"div[class='ss-container new-user'] div:nth-child(2)  input[class='ss-input']")
-    new_usr_input_lname=(By.CSS_SELECTOR,"div[class='ss-container new-user'] div:nth-child(3)  input[class='ss-input']")
-    new_usr_input_mobile=(By.CSS_SELECTOR,"div[class='ss-container new-user'] div:nth-child(4)  input[class='ss-input']")
-    new_usr_save_btn=(By.CSS_SELECTOR,"div[class='rectangle-button ss-button']")
+    new_usr_input_fname=(By.CSS_SELECTOR,"input[id='firstName']")
+    new_usr_input_lname=(By.CSS_SELECTOR,"input[id='lastName']")
+    new_usr_input_mobile=(By.CSS_SELECTOR,"input[id='mobilePhone']")
+    new_usr_save_btn=(By.CSS_SELECTOR,"button[class='button undefined']")
     
-    poped_msg=(By.CSS_SELECTOR,"div[class='noti-modal-container']")
+    poped_msg=(By.CSS_SELECTOR,"div[class*='noti-modal-container']")
     close_msg=(By.CSS_SELECTOR,"div[class='rectangle-button noti-modal-button']")
     
 

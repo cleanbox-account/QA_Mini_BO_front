@@ -5,9 +5,12 @@
 # ---------------------------------------------------------------------------
 """ Create New Order page """
 # ---------------------------------------------------------------------------from selenium.webdriver.common.by import By
+from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class CreateNewOrderPage:
     def __init__(self, driver):
@@ -18,15 +21,16 @@ class CreateNewOrderPage:
     station_input=(By.CSS_SELECTOR,"div[class*='station-selector']  input")
     station_menu=(By.CSS_SELECTOR,"div[class*='station-selector']")
     #stations_in_list=(By.CSS_SELECTOR,"div[id='react-select-2-listbox'] > div > div")
-    stations_in_list=(By.CSS_SELECTOR,"div[class*='station-selector']:nth-child(2)>div>div div")
-    
+    #stations_in_list=(By.CSS_SELECTOR,"div[class*='station-selector']:nth-child(2)>div>div div")
+    stations_in_list=(By.CSS_SELECTOR,"div[class*='station-selector'] *:nth-child(4)>div div")
+
     pcg_num_input=(By.CSS_SELECTOR,"input[placeholder='*מספר חבילה']")
     mobile_num_input=(By.CSS_SELECTOR,"input[placeholder='*מספר טלפון']")
     first_name_input=(By.CSS_SELECTOR,"input[placeholder='*שם פרטי']")
     last_name_input=(By.CSS_SELECTOR,"input[placeholder='*שם משפחה']")
     
-    back_btn=(By.CSS_SELECTOR,"button[class*='circle-blue-button']")
-    create_btn=(By.CSS_SELECTOR,"button[class*='circle-button']")
+    back_btn=(By.CSS_SELECTOR,"button[class='button back']")
+    create_btn=(By.CSS_SELECTOR,"button[class='button undefined']")
     
     msg_succ = (By.CSS_SELECTOR,"div[class*='message-wrapper success']")
     close_msg = (By.CSS_SELECTOR,"div[class='message-button']")
@@ -51,8 +55,12 @@ class CreateNewOrderPage:
         return self.driver.find_element(*CreateNewOrderPage.back_btn).click()
     
     def clickCreateBtn(self):
-        return self.driver.find_element(*CreateNewOrderPage.create_btn).click()
-    
+        try:
+            create_btn= WebDriverWait(self.driver,2).until(EC.element_to_be_clickable(CreateNewOrderPage.create_btn))
+
+            return create_btn.click()
+        except :
+            return False
     def clickCloseMsgBtn(self):
         return self.driver.find_element(*CreateNewOrderPage.close_msg).click()
     
@@ -70,8 +78,9 @@ class CreateNewOrderPage:
                         except Exception:
                             st.find_element_by_xpath("..").click()
                 
-                        return station_name     
-                return False    
+                        return station_name  
+                      
+                return stations[0].click()     
             else:
                 return False
         except NoSuchElementException:

@@ -16,7 +16,7 @@ class OrdersListPage:
     rows_in_table=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr")
     first_row_in_table=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr:nth-child(1)")
     
-    #  M_  for Yad Mordehai / Sde Moshe / Amirim / YDM / BAR / DHL / OneProject 
+    #  M_  for Yad Mordehai / Sde Moshe / Amirim / YDM / BAR / DHL / OneProject / Geffen Madical
     m_edit_btn=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(1)")  
     m_date=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(2)")
     m_pcg_number=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(3)")
@@ -40,7 +40,7 @@ class OrdersListPage:
     d_created_user=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(8)")
     d_station_name=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(9)")
 
-    #  S_ for  UPS / Geffen Madical 
+    #  S_ for  UPS /  
     s_date=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(1)")
     s_pcg_number=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(2)")
     s_order_number=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(3)")
@@ -140,6 +140,8 @@ class OrdersListPage:
                 'order_status':order_status,
                 'created_user':created_user,
                 'station_name':station_name,
+                'order_number':'',
+                'waybill':''
                 }
             return order_details
         elif table_type=='S':
@@ -210,6 +212,7 @@ class OrdersListPage:
                 'order_status':order_status,
                 'created_user':created_user,
                 'station_name':station_name,
+                'waybill':''
                 }
             return order_details
         

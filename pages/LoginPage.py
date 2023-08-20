@@ -10,8 +10,8 @@ class LoginScreen:
     phone_num_input = (By.CSS_SELECTOR, "div.input-field:nth-child(1) input[class*='infl-wrapper undefined infl-err  infl-mandatory']")
     password_input = (By.CSS_SELECTOR, "div.input-field:nth-child(2) input[class*='infl-wrapper undefined infl-err  infl-mandatory']")
    
-    signIn_btn = (By.CSS_SELECTOR,"button[class='circle-button']")
-    bad_login_msg = (By.CSS_SELECTOR,"div[class*='message-wrapper error']")
+    signIn_btn = (By.CSS_SELECTOR,"button[class='button undefined']")
+    bad_login_msg = (By.CSS_SELECTOR,"div[class*='rectangle-button noti-modal-button']")
     close_err_msg=(By.CSS_SELECTOR,"div[class='message-button']")
     
 

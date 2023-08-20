@@ -26,6 +26,7 @@ class Menu:
     stations=(By.XPATH,"//div[text()='עמדות']")
     users=(By.XPATH,"//div[text()='משתמשים']")
     reports=(By.XPATH,"//div[text()='דוח חיובי חבילות']")
+    failed_sms=(By.XPATH,"//div[text()='SMS שנכשלו']")
     scan=(By.XPATH,"//div[text()='סריקה']")
     logout=(By.XPATH,"//div[text()='התנתק']")
 
@@ -67,6 +68,13 @@ class Menu:
     def getReportsLink(self):
         try :
             self.driver.find_element(*Menu.reports).click()
+            return True
+        except:
+            return False
+        
+    def getFailedSMSLink(self):
+        try :
+            self.driver.find_element(*Menu.failed_sms).click()
             return True
         except:
             return False

@@ -28,20 +28,24 @@ class TestUsersPage(BaseClass):
     users_list_page=env.users_list_page
         
     @pytest.mark.parametrize('role', [pytest.param('DHL'),  #dhl
-                                                pytest.param('Bar' ),   #bar
+                                                pytest.param('Bar' ),   #Bar
                                                 pytest.param('UPS' ),   #ups
                                                 pytest.param('Decathlon' ),   #decathlon
                                                 pytest.param('GeffenMedical' ),   #gefenMedical
                                                 pytest.param('YadMordechai' ),   #yadmordehai
+                                                pytest.param('Amirim' ),   #amrim
                                                 pytest.param('SdeMoshe' ),   #sde moshe
                                                 pytest.param('Amirim' ),   #amirim
                                                 pytest.param('YDM' ) , #ydm
                                                 pytest.param('TAU' ) , #tau
-                                                pytest.param('HFD' )  #hfd
+                                                pytest.param('HFD' ),  #hfd
+                                                pytest.param('Exelot' ) , #exelot
+                                                pytest.param('OneProject' ),  #oneproject
+                                                pytest.param('BerorHayil' )  #BerorHayil
                                                ])
-    def test_16_new_user(self, role):
+    def test_04_new_user(self, role):
         log = self.getLogger('test')
-        log.info("---"+" "*10+"Mini BO users page test for <{0}> operator".format(role)+" "*10+"---")
+        log.info("---"+" "*10+"Create New Users page test for <{0}> operator".format(role)+" "*10+"---")
         if not self.driver.current_url== self.main_page :
             menu_panel=Menu(self.driver)
             log.info("Logout try ...")
@@ -68,7 +72,7 @@ class TestUsersPage(BaseClass):
         logined_yes_not=LoginMiniBO.login_to_mini_bo(self, user["mobile_number"], user["password"], role)
         if not logined_yes_not:
             assert  False
-        elif role in ('DHL','Bar','UPS','YDM','HFD'):
+        elif role in ('DHL','Bar','UPS','YDM','HFD','Exelot'):
             assert self.driver.current_url == self.stations_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         elif role =='Decathlon':
@@ -89,7 +93,7 @@ class TestUsersPage(BaseClass):
             
             assert self.driver.current_url == self.orders_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for selected station has opened".format(self.driver.current_url,role))
-        elif role in ('GeffenMedical','YadMordechai','SdeMoshe','Amirim','TAU'):
+        elif role in ('GeffenMedical','YadMordechai','SdeMoshe','Amirim','TAU','OneProject','BerorHayil'):
             assert self.driver.current_url == self.orders_list_page, log.error("Failed assertion, wrong url...")
             log.info("Succeed Assertion, the <{0}> page for <{1}> role has opened".format(self.driver.current_url,role))
         else:

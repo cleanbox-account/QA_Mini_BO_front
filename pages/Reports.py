@@ -13,7 +13,7 @@ class ReportScreen:
     months=(By.CSS_SELECTOR,"div[id='month'] option")
     years=(By.CSS_SELECTOR,"div[id='year'] option")
     
-    download=(By.CSS_SELECTOR,"input[class='download-file-button']")
+    download=(By.CSS_SELECTOR,"div[class='btn-download-wrapper'] button")
 
     def getMonthList(self):
         return self.driver.find_element(*ReportScreen.month_list).click()
