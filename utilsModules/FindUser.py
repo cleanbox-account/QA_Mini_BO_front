@@ -9,10 +9,20 @@ def get_user(usr_role):
     try:
         json_in = open(file)
         users=json.load(json_in)
-        # for usr in users:
-        #     if usr["role"]==usr_role:
-        #         my_user= usr
-        #         break
+
+        my_user=next(filter(lambda user:user['role']==usr_role,users),None)
+    except FileNotFoundError:
+        return None
+    json_in.close()
+    return my_user
+
+def get_bo_user(usr_role):
+    file=env.json_bousers     #used json file out off project path > absolute file path
+    
+    try:
+        json_in = open(file)
+        users=json.load(json_in)
+
         my_user=next(filter(lambda user:user['role']==usr_role,users),None)
     except FileNotFoundError:
         return None

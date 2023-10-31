@@ -6,7 +6,7 @@ def switch_account_type_name(account_type):
     elif account_type =="DHL" :
         return 'DHL'
     elif account_type =="Bar" :
-        return 'BAR'
+        return 'Bar'
     elif account_type =="UPS" :
         return 'UPS'
     elif account_type =="Decathlon" :
@@ -53,7 +53,12 @@ def switch_account_type_name(account_type):
         return 'BRH'
     elif account_type =="CDEK" :
         return 'CDK'
-
+    elif account_type =="Velo" :
+        return 'VEL'
+    elif account_type =="Benda" :
+        return 'BND'
+    elif account_type =="Azrieli" :
+        return 'AZR'
     else:
         return 'NA'
     
@@ -93,7 +98,7 @@ def switch_Orders_Type_to_Short(order_type):
     elif order_type == 13:
         return 'DHL'
     elif order_type == 14:
-        return 'BAR'
+        return 'Bar'
     elif order_type == 15:
         return 'UPS'
     elif order_type == 16:
@@ -126,6 +131,8 @@ def switch_Orders_Type_to_Short(order_type):
         return 'CDK' #return CDEK
     elif order_type == 30:
         return 'BRH' #BerorHayil
+    elif order_type == 31:
+        return 'RTRN' #ReturnsExternal
 
 
     
@@ -155,7 +162,7 @@ def switch_Orders_Type_to_string(order_type):
     elif order_type == 13:
         return 'DHL'
     elif order_type == 14:
-        return 'BAR'
+        return 'Bar'
     elif order_type == 15:
         return 'UPS'
     elif order_type == 16:
@@ -188,6 +195,8 @@ def switch_Orders_Type_to_string(order_type):
         return 'CDEK' 
     elif order_type == 30:
         return 'BerorHayil' 
+    elif order_type == 31:
+        return 'ReturnsExternal' 
     
 
 def switch_Orders_Status_Name(order_state):
@@ -231,7 +240,7 @@ def find_account_type(account_type):
         return 1
     elif account_type =="DHL" :
         return 2
-    elif account_type =="BAR" :
+    elif account_type =="Bar" :
         return 3
     elif account_type =="UPS" :
         return 4
@@ -283,6 +292,8 @@ def find_account_type(account_type):
         return 27
     elif account_type =="BerorHayil" :
         return 28
+    elif account_type =="Azrieli" :
+        return 29
 
 
     else:

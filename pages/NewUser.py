@@ -21,7 +21,7 @@ class NewUserPage:
     new_usr_save_btn=(By.CSS_SELECTOR,"button[class='button undefined']")
     
     poped_msg=(By.CSS_SELECTOR,"div[class*='noti-modal-container']")
-    close_msg=(By.CSS_SELECTOR,"div[class='rectangle-button noti-modal-button']")
+    close_msg=(By.CSS_SELECTOR,"button[class='button noti-modal-button']")
     
 
     def getFirstNameInput(self):

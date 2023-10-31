@@ -11,7 +11,7 @@ from time import sleep
 from pages.DecathlonStations import DecathlonStationSelectScreen
 from pages.Menu import Menu
 from pages.Reports import ReportScreen
-from utilsModules.FindUser import get_user
+from utilsModules.FindUser import get_bo_user, get_user
 from utilsModules.LoginMiniBO import LoginMiniBO
 from utilsModules.BaseClass import BaseClass
 import Data.pages_addresses as env
@@ -58,7 +58,7 @@ class TestBasicSuppliersBO(BaseClass):
                 pass
         assert self.driver.current_url == self.main_page , log.warning("Failed asertion, current page is not Login")
         log.info("Succeed to open login page: %s" % self.driver.current_url)
-        user=get_user(role)
+        user=get_bo_user(role)
         assert not user==None , log.error("Failed assertion, user details was not found")
         log.info("Succeed to find user's details with {0}:".format(role))
         log.info("user first name:"+user["user_f_name"])

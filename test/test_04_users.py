@@ -14,7 +14,7 @@ from pages.NewUser import NewUserPage
 from pages.UsersList import UsersListePage
 from utilsModules.LoginMiniBO import LoginMiniBO
 from utilsModules.BaseClass import BaseClass
-from utilsModules.FindUser import get_user
+from utilsModules.FindUser import get_bo_user, get_user
 import Data.pages_addresses as env
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -61,7 +61,7 @@ class TestUsersPage(BaseClass):
                 pass
         assert self.driver.current_url == self.main_page , log.warning("Failed asertion, current page is not Login")
         log.info("Succeed to open login page: %s" % self.driver.current_url)
-        user=get_user(role)
+        user=get_bo_user(role)
         assert not user==None , log.error("Failed assertion, user details was not found")
         log.info("Succeed to find user's details with {0}:".format(role))
         log.info("user first name:"+user["user_f_name"])
@@ -138,14 +138,14 @@ class TestUsersPage(BaseClass):
         has_usr=False
         
         for usr in usr_list:
-            if usr.find_element(By.CSS_SELECTOR,"td:nth-child(3)").text==new_phone:
+            if usr.find_element(By.CSS_SELECTOR,"td:nth-child(4)").text==new_phone:
                 
-                log.info("Succeed to find new user in the table: \n>>> {0} {1} - #{2} <<<".format(usr.find_element(By.CSS_SELECTOR,"td:nth-child(1)").text,
-                                                                                          usr.find_element(By.CSS_SELECTOR,"td:nth-child(2)").text,
-                                                                                          usr.find_element(By.CSS_SELECTOR,"td:nth-child(3)").text))
+                log.info("Succeed to find new user in the table: \n>>> {0} {1} - #{2} <<<".format(usr.find_element(By.CSS_SELECTOR,"td:nth-child(2)").text,
+                                                                                          usr.find_element(By.CSS_SELECTOR,"td:nth-child(3)").text,
+                                                                                          usr.find_element(By.CSS_SELECTOR,"td:nth-child(4)").text))
                 has_usr=True
                 sleep(2)
-                usr.find_element(By.CSS_SELECTOR,"td:nth-child(5)").click()
+                usr.find_element(By.CSS_SELECTOR,"td:nth-child(7)").click()
                 if self.verifyElSelectorPresence(usr_page.yes_no_del_usr):
                     log.info("Try to delete New User...")
                     try :

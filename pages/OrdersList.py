@@ -27,7 +27,8 @@ class OrdersListPage:
     m_order_status=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(8)")
     m_created_user=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(9)")
     m_station_name=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(10)")
-    m_waybill=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(11)")
+    m_extension_date=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(11)")
+    m_waybill=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(12)")
     
     #  D_  for Decathlon
     d_edit_btn=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(1)")  
@@ -39,6 +40,7 @@ class OrdersListPage:
     d_order_status=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(7)")
     d_created_user=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(8)")
     d_station_name=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(9)")
+    d_extension_date=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(10)")
 
     #  S_ for  UPS /  
     s_date=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(1)")
@@ -50,7 +52,8 @@ class OrdersListPage:
     s_order_status=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(7)")
     s_created_user=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(8)")
     s_station_name=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(9)")
-    s_waybill=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(10)")
+    s_extension_date=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(10)")
+    s_waybill=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(11)")
     
     #  T_ for  TAU
     t_edit_btn=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(1)")
@@ -63,6 +66,7 @@ class OrdersListPage:
     t_order_status=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(8)")
     t_created_user=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(9)")
     t_station_name=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(10)")
+    t_extension_date=(By.CSS_SELECTOR,"div.table-container > table > tbody > tr > td:nth-child(11)")
 
 
     
